@@ -23,10 +23,8 @@ public class Client {
         //Инициализация изображения в формате java
         ImageIcon ic;
 
-        //String serverIP="25.57.172.199";
-        String serverIP= args[1];
-        int port = Integer.parseInt(args[2]);
-        //int port=4321;
+        String serverIP= args[0];
+        int port = Integer.parseInt(args[1]);
         Socket socket = new Socket(serverIP,port);
 
         while(socket.isConnected()) {
@@ -47,6 +45,7 @@ public class Client {
                 window.pack();
             }
         }
+        socket.close();
 
         //Создаем события закрытия.
         window.dispatchEvent(new WindowEvent(window,WindowEvent.WINDOW_CLOSING));

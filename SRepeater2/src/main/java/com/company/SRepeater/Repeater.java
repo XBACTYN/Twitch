@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.Socket;
 import com.github.sarxos.webcam.Webcam;
 import java.awt.Dimension;
+import java.sql.SQLOutput;
 
 
 public class Repeater {
@@ -30,9 +31,10 @@ public class Repeater {
         webcam.setViewSize(new Dimension(640, 480));
         webcam.open();
 
+        System.out.println(args[0]+" "+args[1]);
         //String serverIP="25.57.172.199";
-        String serverIP= args[1];
-        int port = Integer.parseInt(args[2]);
+        String serverIP= args[0];
+        int port = Integer.parseInt(args[1]);
         //int port=1234;
 
             Socket socket = new Socket(serverIP, port);

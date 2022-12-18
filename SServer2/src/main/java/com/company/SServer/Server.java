@@ -21,7 +21,7 @@ public class Server {
 
         InetAddress ServerIP =  InetAddress.getByName(address);;
         ServerSocket repeaterSocket = new ServerSocket(repeaterPort,1,ServerIP);
-        ServerSocket clientSocket = new ServerSocket(clientPort,5,ServerIP);
+        ServerSocket clientSocket = new ServerSocket(clientPort,1,ServerIP);
         while(true)
         {
             try{
@@ -34,16 +34,32 @@ public class Server {
                 DataOutputStream dataOutputStream = new DataOutputStream(client.getOutputStream());
                 while(repeater.isConnected())
                 {
-                    //размер пакета
-                    int length = dataInputStream.readInt();
+                    try {
+                        if (client.isConnected()) {
+                            System.out.println("Идет передача");
+                            //размер пакета
+                            int length = dataInputStream.readInt();
 
-                    if(length >0){
-                        byte [] imageData = new byte[length];
-                        dataInputStream.readFully(imageData,0,length);
+                            if (length > 0) {
+                                byte[] imageData = new byte[length];
+                                dataInputStream.readFully(imageData, 0, length);
 
-                        //Здесь должны быть все клиенты
-                        dataOutputStream.writeInt(length);
-                        dataOutputStream.write(imageData);
+                                //Здесь должны быть все клиенты
+                                dataOutputStream.writeInt(length);
+                                dataOutputStream.write(imageData);
+                            }
+
+                        } else {
+                            client.close();
+                            System.out.println("Else");
+                            client = clientSocket.accept();
+                        }
+                    }
+                    catch (Exception e){
+                        client.close();
+                        System.out.println("Catch");
+                        client = clientSocket.accept();
+                        dataOutputStream = new DataOutputStream(client.getOutputStream());
                     }
                 }
                 client.close();
