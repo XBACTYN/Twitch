@@ -1,21 +1,18 @@
 package com.company.SServer;
 
-//import org.opencv.core.Core;
-//import org.opencv.core.Mat;
-//import org.opencv.core.MatOfByte;
 
 import javax.swing.*;
 import javax.xml.crypto.Data;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.InetSocketAddress;
 
 public class Server {
-//    static {System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-//        System.out.println(Core.VERSION);
-//    }
+
 
     public static void main (String []args) throws IOException {
         System.out.println("Server");
@@ -24,47 +21,45 @@ public class Server {
 //        JLabel screen = new JLabel();
 //        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        window.setVisible(true);
-//
-//        //Изображение
-//        Mat frame = new Mat();
-//        //Матрица байтов
-//        MatOfByte buf = new MatOfByte();
-//        //Инициализация изображения в формате java
-//        ImageIcon ic;
-//
-//        ServerSocket serverSocket = new ServerSocket(1234);
-//        ServerSocket repeaterSocket = new ServerSocket(4321);
-//        while(true)
-//        {
-//            try{
-//                //Сокет клиента
-//                //Socket socket = serverSocket.accept();
-//                Socket repeater = repeaterSocket.accept();
-//                Socket client = serverSocket.accept();
-//
-//                DataInputStream dataInputStream = new DataInputStream(repeater.getInputStream());
-//                DataOutputStream dataOutputStream = new DataOutputStream(client.getOutputStream());
-//                while(repeater.isConnected())
-//                {
-//                    //размер пакета
-//                    int length = dataInputStream.readInt();
-//
-//                    if(length >0){
-//                        byte [] imageData = new byte[length];
-//                        dataInputStream.readFully(imageData,0,length);
-//
-//                        //Здесь должны быть все клиенты
-//                        dataOutputStream.writeInt(length);
-//                        dataOutputStream.write(imageData);
-//                    }
-//                }
-//                client.close();
-//                repeater.close();
-//            }
-//            catch (Exception e){
-//                e.printStackTrace();
-//        }
-//        }
+
+        String address = "25.57.172.199";
+        int repeaterPort = 1234;
+        int clientPort = 4321;
+
+        InetAddress ServerIP =  InetAddress.getByName(address);;
+        ServerSocket repeaterSocket = new ServerSocket(repeaterPort,1,ServerIP);
+        ServerSocket clientSocket = new ServerSocket(clientPort,5,ServerIP);
+        while(true)
+        {
+            try{
+                //Сокет клиента
+                //Socket socket = serverSocket.accept();
+                Socket repeater = repeaterSocket.accept();
+                Socket client = clientSocket.accept();
+
+                DataInputStream dataInputStream = new DataInputStream(repeater.getInputStream());
+                DataOutputStream dataOutputStream = new DataOutputStream(client.getOutputStream());
+                while(repeater.isConnected())
+                {
+                    //размер пакета
+                    int length = dataInputStream.readInt();
+
+                    if(length >0){
+                        byte [] imageData = new byte[length];
+                        dataInputStream.readFully(imageData,0,length);
+
+                        //Здесь должны быть все клиенты
+                        dataOutputStream.writeInt(length);
+                        dataOutputStream.write(imageData);
+                    }
+                }
+                client.close();
+                repeater.close();
+            }
+            catch (Exception e){
+                e.printStackTrace();
+        }
+        }
     }
 
 }
