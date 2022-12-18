@@ -1,0 +1,4 @@
+# Project exclude paths
+/SClient2/target/
+/SRepeater2/target/
+/SServer2/target/

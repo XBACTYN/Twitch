@@ -1,0 +1,28 @@
+<!-- https://mvnrepository.com/artifact/org.openpnp/opencv -->
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.company</groupId>
+    <artifactId>Twitch</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+
+    <properties>
+        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.target>19</maven.compiler.target>
+    </properties>
+
+    <modules>
+        <module>SRepeater2</module>
+        <module>SServer2</module>
+        <module>SClient2</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.sarxos</groupId>
+            <artifactId>webcam-capture</artifactId>
+            <version>0.3.12</version>
+        </dependency>
+    </dependencies>
+</project>
