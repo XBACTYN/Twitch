@@ -1,26 +1,19 @@
 package com.company.SServer;
 
 
-import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.InetSocketAddress;
+
 
 public class Server {
 
 
     public static void main (String []args) throws IOException {
         System.out.println("Server");
-//        JFrame window = new JFrame();
-//        //Контейнер для изображения
-//        JLabel screen = new JLabel();
-//        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        window.setVisible(true);
 
         String address = "25.57.172.199";
         int repeaterPort = 1234;

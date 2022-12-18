@@ -1,10 +1,5 @@
 package com.company.SRepeater;
 
-//import org.opencv.core.Core;
-//import org.opencv.core.Mat;
-//import org.opencv.core.MatOfByte;
-//import org.opencv.imgcodecs.Imgcodecs;
-//import org.opencv.videoio.VideoCapture;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -17,13 +12,9 @@ import java.net.Socket;
 import com.github.sarxos.webcam.Webcam;
 import java.awt.Dimension;
 
+
 public class Repeater {
-    static {
-        //nu.pattern.OpenCV.loadLibrary();
-        //System.loadLibrary(org.opencv.core.Core.NATIVE_LIBRARY_NAME);
-        //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        //System.out.println(Core.VERSION);
-    }
+
     public static void main (String []args) throws IOException {
         System.out.println("hello");
         JFrame window = new JFrame();
@@ -39,8 +30,10 @@ public class Repeater {
         webcam.setViewSize(new Dimension(640, 480));
         webcam.open();
 
-        String serverIP="25.57.172.199";
-        int port=1234;
+        //String serverIP="25.57.172.199";
+        String serverIP= args[1];
+        int port = Integer.parseInt(args[2]);
+        //int port=1234;
 
             Socket socket = new Socket(serverIP, port);
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());

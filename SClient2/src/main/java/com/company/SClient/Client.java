@@ -10,6 +10,7 @@ import java.net.Socket;
 public class Client {
 
     public static void main (String []args) throws IOException {
+
         System.out.println("Client");
         JFrame window = new JFrame();
         //Контейнер для изображения
@@ -22,8 +23,10 @@ public class Client {
         //Инициализация изображения в формате java
         ImageIcon ic;
 
-        String serverIP="25.57.172.199";
-        int port=4321;
+        //String serverIP="25.57.172.199";
+        String serverIP= args[1];
+        int port = Integer.parseInt(args[2]);
+        //int port=4321;
         Socket socket = new Socket(serverIP,port);
 
         while(socket.isConnected()) {
