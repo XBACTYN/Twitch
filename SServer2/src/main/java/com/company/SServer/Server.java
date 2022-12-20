@@ -15,7 +15,10 @@ public class Server {
     public static void main (String []args) throws IOException {
         System.out.println("Server");
 
-        String address = "25.57.172.199";
+        String address = args[0];
+        //System.out.println(args[0]+" "+args[1]);
+        //String serverIP="25.57.172.199";
+        //String serverIP= args[0]
         int repeaterPort = 1234;
         int clientPort = 4321;
 
